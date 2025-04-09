@@ -9,7 +9,6 @@ st.set_page_config(layout="wide", page_title="EtherScan Wallet Dashboard")
 st.sidebar.title("Upload CSV")
 uploaded_file = st.sidebar.file_uploader("/Users/ivyadiele/Desktop/PythonProject/EtherscanScraper/data/etherscan_transactions.csv", type=["csv"])
 
-st.sidebar.download_button("Download Sample CSV", demo_csv_string, file_name="sample.csv")
 
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
