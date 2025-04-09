@@ -28,6 +28,7 @@ if uploaded_file:
 
     address = st.sidebar.text_input("Paste Ethereum address")
     if st.sidebar.button("Fetch Transactions"):
+        # call Etherscan API, pull txs, convert to DataFrame
 
     st.title("EtherScan Wallet Transaction Dashboard")
     st.markdown(f"Transactions from **{df['from'].iloc[0]}** to {df_filtered['to'].nunique()} addresses")
