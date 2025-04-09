@@ -107,3 +107,19 @@ if uploaded_file:
 
 else:
     st.info("Upload a CSV file to begin.")
+
+def all_figs_to_pdf(figures):
+    buf = BytesIO()
+    with PdfPages(buf) as pdf:
+        for fig in figures:
+            pdf.savefig(fig, bbox_inches='tight')
+    buf.seek(0)
+    return buf
+
+st.subheader("Export Full Dashboard as PDF")
+st.download_button(
+    label="Download All Charts as PDF",
+    data=all_figs_to_pdf([fig1, fig2, fig3, fig4]),
+    file_name="eth_wallet_dashboard.pdf",
+    mime="application/pdf"
+)
