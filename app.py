@@ -4,6 +4,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import streamlit as st
 import requests
+from matplotlib.backends.backend_pdf import PdfPages
+from io import BytesIO
 
 st.set_page_config(layout="wide", page_title="EtherScan Wallet Dashboard")
 
@@ -108,7 +110,7 @@ if uploaded_file:
     
     st.subheader("📄 Export Full Dashboard as PDF")
     st.download_button(
-        label="📥 Download All Charts as PDF",
+        label="Download All Charts as PDF",
         data=all_figs_to_pdf([fig1, fig2, fig3, fig4]),
         file_name="eth_wallet_dashboard.pdf",
         mime="application/pdf"
