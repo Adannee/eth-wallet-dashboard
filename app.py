@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import requests
 
+st.set_page_config(layout="wide", page_title="EtherScan Wallet Dashboard")
+
 ETHERSCAN_API_KEY = st.secrets["ETHERSCAN_API_KEY"]
 
 st.sidebar.title("Wallet Lookup")
@@ -37,8 +39,6 @@ if fetch_button and wallet_address.startswith("0x"):
             df["success"] = df["isError"].astype(int) == 0
         else:
             st.error(f"No transactions found or error: {data.get('message', '')}")
-
-st.set_page_config(layout="wide", page_title="EtherScan Wallet Dashboard")
 
 
 st.sidebar.title("Upload CSV")
