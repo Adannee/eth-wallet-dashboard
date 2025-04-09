@@ -9,6 +9,8 @@ st.set_page_config(layout="wide", page_title="EtherScan Wallet Dashboard")
 st.sidebar.title("Upload CSV")
 uploaded_file = st.sidebar.file_uploader("/Users/ivyadiele/Desktop/PythonProject/EtherscanScraper/data/etherscan_transactions.csv", type=["csv"])
 
+st.sidebar.download_button("Download Sample CSV", demo_csv_string, file_name="sample.csv")
+
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
     df["timestamp"] = pd.to_datetime(df["timestamp"])
@@ -24,6 +26,8 @@ if uploaded_file:
     if not show_failed:
         df_filtered = df_filtered[df_filtered["success"] == True]
 
+    address = st.sidebar.text_input("Paste Ethereum address")
+    if st.sidebar.button("Fetch Transactions"):
 
     st.title("EtherScan Wallet Transaction Dashboard")
     st.markdown(f"Transactions from **{df['from'].iloc[0]}** to {df_filtered['to'].nunique()} addresses")
