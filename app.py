@@ -52,7 +52,7 @@ if fetch_button and wallet_address.startswith("0x"):
 
 
 st.sidebar.title("Upload CSV")
-uploaded_file = st.sidebar.file_uploader("/Users/ivyadiele/Desktop/PythonProject/EtherscanScraper/data/etherscan_transactions.csv", type=["csv"])
+uploaded_file = st.sidebar.file_uploader("Upload Transaction CSV", type=["csv"])
 
 
 if uploaded_file:
