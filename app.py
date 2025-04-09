@@ -7,6 +7,14 @@ import requests
 from matplotlib.backends.backend_pdf import PdfPages
 from io import BytesIO
 
+def all_figs_to_pdf(figures):
+    buf = BytesIO()
+    with PdfPages(buf) as pdf:
+        for fig in figures:
+            pdf.savefig(fig, bbox_inches='tight')
+    buf.seek(0)
+    return buf
+
 st.set_page_config(layout="wide", page_title="EtherScan Wallet Dashboard")
 
 ETHERSCAN_API_KEY = st.secrets["ETHERSCAN_API_KEY"]
