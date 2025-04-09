@@ -2,6 +2,41 @@ import streamlit as st
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import streamlit as st
+import requests
+
+ETHERSCAN_API_KEY = st.secrets["ETHERSCAN_API_KEY"]
+
+st.sidebar.title("Wallet Lookup")
+
+wallet_address = st.sidebar.text_input("Paste Ethereum address", placeholder="0x...")
+fetch_button = st.sidebar.button("Fetch Transactions")
+
+use_sample = False
+df = None
+
+if fetch_button and wallet_address.startswith("0x"):
+    with st.spinner("Fetching transactions..."):
+        url = (
+            f"https://api.etherscan.io/api?module=account&action=txlist"
+            f"&address={wallet_address}&startblock=0&endblock=99999999"
+            f"&page=1&offset=10000&sort=asc&apikey={ETHERSCAN_API_KEY}"
+        )
+        response = requests.get(url)
+        data = response.json()
+
+        if data["status"] == "1":
+            txs = data["result"]
+            df = pd.DataFrame(txs)
+            df["timestamp"] = pd.to_datetime(df["timeStamp"], unit="s")
+            df["date"] = df["timestamp"].dt.date
+            df["gasPrice"] = df["gasPrice"].astype(float)
+            df["gasUsed"] = df["gasUsed"].astype(float)
+            df["value"] = df["value"].astype(float) / 1e18
+            df["tx_fee_eth"] = (df["gasPrice"] * df["gasUsed"]) / 1e18
+            df["success"] = df["isError"].astype(int) == 0
+        else:
+            st.error(f"No transactions found or error: {data.get('message', '')}")
 
 st.set_page_config(layout="wide", page_title="EtherScan Wallet Dashboard")
 
