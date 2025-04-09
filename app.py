@@ -34,10 +34,10 @@ if fetch_button and wallet_address.startswith("0x"):
             df = pd.DataFrame(txs)
             df["timestamp"] = pd.to_datetime(df["timeStamp"], unit="s")
             df["date"] = df["timestamp"].dt.date
-            df["gasPrice"] = df["gasPrice"].astype(float)
-            df["gasUsed"] = df["gasUsed"].astype(float)
-            df["value"] = df["value"].astype(float) / 1e18
-            df["tx_fee_eth"] = (df["gasPrice"] * df["gasUsed"]) / 1e18
+            df["gas price (Gwei)"] = df["gas price (Gwei)"].astype(float)
+            df["gas used"] = df["gas used"].astype(float)
+            df["value (ETH)"] = df["value (ETH)"].astype(float) / 1e18
+            df["tx fee (ETH)"] = (df["gas price (Gwei)"] * df["gas used"]) / 1e18
             df["success"] = df["isError"].astype(int) == 0
         else:
             st.error(f"No transactions found or error: {data.get('message', '')}")
