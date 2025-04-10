@@ -24,3 +24,31 @@ A Streamlit-based web dashboard to analyze Ethereum wallet transactions using th
 - [Etherscan API](https://docs.etherscan.io/) for real-time wallet data
 - [Pandas](https://pandas.pydata.org/) for data wrangling
 - [Seaborn](https://seaborn.pydata.org/) + [Matplotlib](https://matplotlib.org/) for visualizations
+
+---
+
+## 📁 Setup Instructions
+
+### 1. Clone the Repo
+
+```bash
+git clone https://github.com/your-username/etherscan-wallet-dashboard.git
+cd etherscan-wallet-dashboard
+```
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+### 3. Add Etherscan API Key
+#### Create a .streamlit/secrets.toml file:
+```toml
+ETHERSCAN_API_KEY = "your_api_key_here"
+```
+### 4. Run the App
+```bash
+streamlit run app.py
+```
+Then visit https://etherscanscraper.streamlit.app/
+
+---
